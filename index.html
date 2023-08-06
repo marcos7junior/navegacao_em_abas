@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .border {
+            border: 1px solid black;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+        }
+
+        .img {
+            width: 480px;
+            height: 390px;
+        } 
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .tabs_container {
+            display: flex;
+            flex-direction: row;
+            margin: 0 10px;
+        }
+
+        .tabs_container div:hover {
+            cursor: pointer;
+        }
+
+        .content {
+            width: 508px;
+            height: 400px;
+            margin: 0 10px;
+        }
+
+        .selected {
+            background-color: aqua;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .display {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="tabs_container">
+            <div class="aba border">Aba1</div>
+            <div class="aba border">Aba2</div>
+            <div class="aba border">Aba3</div>
+            <div class="aba border">Aba4</div>
+            <div class="aba border">Aba5</div>
+        </div>
+
+        <div class="container_contents">
+            <div class="Aba1 content border hidden">Conteúdo 1 <img class="img" src="./1.jpeg" alt=""></div>
+            <div class="Aba2 content border hidden">Conteúdo 2 <img class="img" src="./2.avif" alt=""></div>
+            <div class="Aba3 content border hidden">Conteúdo 3 <img class="img" src="./3.jpg" alt=""></div>
+            <div class="Aba4 content border hidden">Conteúdo 4 <img class="img" src="./4.jpg" alt=""></div>
+            <div class="Aba5 content border hidden">Conteúdo 5 <img class="img" src="./5.webp" alt=""></div>
+        </div>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.aba');
+        const contents = document.querySelectorAll('.content');
+        const control = [];
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                control.push(e.target)
+                e.target.classList.add('selected')
+                
+                console.log(control)
+
+                if(control.length > 1) {
+                    control[0].classList.remove('selected')
+                    control.shift()
+                }
+                contents.forEach(content => {
+                    let elemento = e.target.innerHTML;
+                    if(content.className.includes(elemento)) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
